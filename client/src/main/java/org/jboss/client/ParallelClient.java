@@ -133,9 +133,9 @@ public class ParallelClient {
         if (ctx == null) {
             synchronized (ParallelClient.class) {
                 if (ctx == null) {
-                    Properties props = new Properties();
-                    props.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
-                    ctx = new InitialContext(props);
+                    Properties contextProperties = new Properties();
+                    contextProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+                    ctx = new InitialContext(contextProperties);
                 }
             }
         }

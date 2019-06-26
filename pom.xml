@@ -43,12 +43,15 @@
 		     filtered resources, i.e. build is platform dependent! -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- EAP component version management BOM -->
-		<!-- https://maven.repository.redhat.com/ga/org/jboss/eap/jboss-eap-parent/ -->
-        <version.jboss.bom.eap>7.2.2.GA</version.jboss.bom.eap>
+        <!-- EAP component version management BOM -->
+        <!-- https://maven.repository.redhat.com/ga/org/jboss/bom/eap/jboss-javaee-6.0-with-tools/ -->
+        <version.jboss.bom.eap>6.4.22.GA</version.jboss.bom.eap>
 
-        <version.jboss-ejb-client>4.0.12.Final-redhat-00001</version.jboss-ejb-client>
-        <version.jboss-logmanager>2.1.5.Final-redhat-00001</version.jboss-logmanager>
+        <!-- https://maven.repository.redhat.com/ga/org/jboss/as/jboss-as-parent/ -->
+        <version.jboss.as>7.5.22.Final-redhat-1</version.jboss.as>
+
+        <version.jboss-ejb-client>1.0.41.Final-redhat-1</version.jboss-ejb-client>
+        <version.jboss-logmanager>1.5.8.Final-redhat-1</version.jboss-logmanager>
 
         
 		<!-- WildFly Maven plug-in to deploy your WAR to a local JBoss EAP container -->
@@ -69,13 +72,28 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.jboss.bom</groupId>
-                <artifactId>eap-runtime-artifacts</artifactId>
+                <groupId>org.jboss.bom.eap</groupId>
+                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
                 <version>${version.jboss.bom.eap}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            
+            <dependency>
+                <groupId>org.jboss.bom.eap</groupId>
+                <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
+                <version>${version.jboss.bom.eap}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.jboss.as</groupId>
+                <artifactId>jboss-as-ejb-client-bom</artifactId>
+                <version>${version.jboss.as}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
             <dependency>
                 <groupId>org.jboss</groupId>
                 <artifactId>remote-ejb-stresstest-ejb</artifactId>

@@ -27,6 +27,13 @@
         </dependency>
 
         <!-- Include the ejb client jars -->
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-ejb-client-bom</artifactId>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency> 
+                
 		<dependency>
 			<groupId>org.jboss</groupId>
 			<artifactId>jboss-ejb-client</artifactId>
