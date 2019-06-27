@@ -88,11 +88,19 @@
                 <artifactId>remote-ejb-stresstest-ejb</artifactId>
                 <version>0.0.1</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.jboss</groupId>
+                <artifactId>remote-ejb-stresstest-rest</artifactId>
+                <version>0.0.1</version>
+                <type>war</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <modules>
         <module>ejb</module>
+        <module>rest</module>
         <module>ear</module>
         <module>client</module>
     </modules>

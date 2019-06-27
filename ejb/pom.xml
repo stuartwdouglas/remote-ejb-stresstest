@@ -55,7 +55,7 @@
             <artifactId>jboss-stdio</artifactId>        
             <scope>provided</scope>
         </dependency>
-
+        
         <!-- dependencies for the remote debugging -->
         <dependency>
             <groupId>org.jboss.marshalling</groupId>

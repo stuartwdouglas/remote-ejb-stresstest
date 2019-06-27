@@ -74,7 +74,7 @@ public class SkipPassivationInterceptor implements Serializable {
     }
 
     @PrePassivate
-    protected void prePassivate(InvocationContext context) throws Exception {
+    public void prePassivate(InvocationContext context) throws Exception {
         // check the SFSB to see if it is passivatable or not
         log.info("Checking if the SFSB is Serializable: " + context.getTarget());
 

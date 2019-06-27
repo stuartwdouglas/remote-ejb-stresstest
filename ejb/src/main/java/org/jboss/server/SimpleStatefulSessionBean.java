@@ -42,14 +42,14 @@ public class SimpleStatefulSessionBean implements SessionBeanRemote, IsSerializa
     
     private static final int MAX = 20;
     private int lastResult = 0;
-    private List<MyData> grow = new ArrayList<MyData>(MAX);
+    private List<UnserializableData> grow = new ArrayList<UnserializableData>(MAX);
 
     public void businessMethod(String calledFrom) {
         
         for (int i = 0; i < MAX; i++) {
             int result = new Random().nextInt(100) * new Random().nextInt(100);
             logger.debugf("Client Thread (%s) - Result: %d", calledFrom, result);
-            grow.add(new MyData("Thread-" + Thread.currentThread().getId(), UUID.randomUUID().toString(), result));
+            grow.add(new UnserializableData("Thread-" + Thread.currentThread().getId(), UUID.randomUUID().toString(), result));
         }
         
         int sum = grow.stream().mapToInt(myData -> myData.getResult()).sum();
@@ -67,21 +67,5 @@ public class SimpleStatefulSessionBean implements SessionBeanRemote, IsSerializa
     @Override
     public boolean isSerializable() {
         return false;
-    }
-
-    private class MyData {
-        private String thread;
-        private String uuid;
-        private int result;
-
-        public MyData(String string, String uuid, int i) {
-            this.thread = string;
-            this.uuid = uuid;
-            this.result = i;
-        }
-        
-        public int getResult() {
-            return this.result;
-        }
     }
 }

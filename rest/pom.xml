@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.jboss</groupId>
+        <artifactId>remote-ejb-stresstest-parent</artifactId>
+        <version>0.0.1</version>
+    </parent>
+    
+    <artifactId>remote-ejb-stresstest-rest</artifactId>
+    <packaging>war</packaging>
+
+    <name>remote-ejb-stresstest-rest</name>
+
+    <dependencies>
+    
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>remote-ejb-stresstest-ejb</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.marshalling</groupId>
+            <artifactId>jboss-marshalling</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.stdio</groupId>
+            <artifactId>jboss-stdio</artifactId>        
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.spec.javax.interceptor</groupId>
+            <artifactId>jboss-interceptors-api_1.2_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+    </dependencies>
+
+    <build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.compiler.plugin}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${version.war.plugin}</version>
+				<configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
