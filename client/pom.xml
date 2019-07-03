@@ -78,6 +78,7 @@
                         <argument>-Dhost=${host}</argument>
                         <argument>-Dtype=${type}</argument>
                         <argument>-Dcalls=${calls}</argument>
+                        <argument>-DresponseSize=${responseSize}</argument>
                         <argument>org.jboss.client.ParallelClient</argument>
                     </arguments>
                 </configuration>

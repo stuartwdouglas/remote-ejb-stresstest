@@ -45,6 +45,30 @@ public class SimpleStatefulSessionBean implements SessionBeanRemote, IsSerializa
     private List<UnserializableData> grow = new ArrayList<UnserializableData>(MAX);
 
     public void businessMethod(String calledFrom) {
+
+        doBusiness(calledFrom);
+    }
+
+    @Remove
+    public void businessMethodDone() {
+        logger.infof("removing %s", this);
+    }
+    
+
+    @Override
+    public byte[] sizedBusinessMethod(String calledFrom, int responseSize) {
+
+        doBusiness(calledFrom);
+        
+        return ByteArrayUtilities.getInstance().getByteArray(responseSize);
+    }
+    
+    @Override
+    public boolean isSerializable() {
+        return false;
+    }
+    
+    private void doBusiness(String calledFrom) {
         
         for (int i = 0; i < MAX; i++) {
             int result = new Random().nextInt(100) * new Random().nextInt(100);
@@ -57,15 +81,5 @@ public class SimpleStatefulSessionBean implements SessionBeanRemote, IsSerializa
         logger.infof("#%d MyData entries with a total result of %d, previous result was %d", grow.size(), sum, lastResult);
         
         lastResult = sum;
-    }
-
-    @Remove
-    public void businessMethodDone() {
-        logger.infof("removing %s", this);
-    }
-    
-    @Override
-    public boolean isSerializable() {
-        return false;
     }
 }

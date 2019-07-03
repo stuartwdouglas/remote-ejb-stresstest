@@ -21,4 +21,6 @@ import javax.ejb.Remote;
 public interface SessionBeanRemote {
     void businessMethod(String calledFrom);
     void businessMethodDone();
+    
+    byte[] sizedBusinessMethod(String callFrom, int responseSize);
 }

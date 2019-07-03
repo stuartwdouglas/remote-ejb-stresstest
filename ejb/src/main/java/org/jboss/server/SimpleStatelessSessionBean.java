@@ -34,6 +34,13 @@ public class SimpleStatelessSessionBean implements SessionBeanRemote {
         logger.infof("Client Thread (%s) - Result: %d", calledFrom, new Random().nextInt(100) * new Random().nextInt(100));
     }
 
+
+    @Override
+    public byte[] sizedBusinessMethod(String calledFrom, int responseSize) {
+        logger.infof("Client Thread (%s) - Result: %d", calledFrom, new Random().nextInt(100) * new Random().nextInt(100));
+        return ByteArrayUtilities.getInstance().getByteArray(responseSize);
+    }
+    
     @Override
     public void businessMethodDone() {
         // do nothing in a SLSB

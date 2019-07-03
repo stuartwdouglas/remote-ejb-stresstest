@@ -58,6 +58,7 @@ public class ParallelClient {
         int poolSize = Integer.getInteger("poolSize", 20);
         int iterations = Integer.getInteger("iterations", 0);
         int calls = Integer.getInteger("calls", 20);
+        int responseSize = Integer.getInteger("responseSize", 0);
 
         final String jndiName;
 
@@ -72,7 +73,7 @@ public class ParallelClient {
                 throw new IllegalArgumentException("SystemProperty 'type' must be one of [slsb|sfsb], it's ["+type+"]");
         }
 
-        log.infof("Using type '%s' with '%s' on '%s:%d', executing %d method calls", type, jndiName, host, port, calls);
+        log.infof("Using type '%s' with '%s' on '%s:%d', executing %d method calls, responseSize is %d", type, jndiName, host, port, calls, responseSize);
 
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(poolSize);
@@ -97,7 +98,7 @@ public class ParallelClient {
             while (now < end) {
                 iterations++;
 
-                Future<InvocationResult> future = taskExecutor.submit(new ThreadProcessor(ctx, iterations, jndiName, calls));
+                Future<InvocationResult> future = taskExecutor.submit(new ThreadProcessor(ctx, iterations, responseSize, jndiName, calls));
                 InvocationResult ir = future.get();
                 statisticsBuilder.addInvocationResult(ir);
                 
@@ -108,7 +109,7 @@ public class ParallelClient {
             }
         } else {
             for (int i = 1; i <= iterations; i++) {
-                Future<InvocationResult> future = taskExecutor.submit(new ThreadProcessor(ctx, iterations, jndiName, calls));
+                Future<InvocationResult> future = taskExecutor.submit(new ThreadProcessor(ctx, iterations, responseSize, jndiName, calls));
                 InvocationResult ir = future.get();
                 statisticsBuilder.addInvocationResult(ir);
 
@@ -290,11 +291,13 @@ class ThreadProcessor implements Callable<InvocationResult> {
     private String jndiName;
     private int iteration = 0;
     private int calls;
+    private int responseSize;
     private Context ctx;
 
-    public ThreadProcessor(Context ctx, int iteration, String jndiName, int calls) {
+    public ThreadProcessor(Context ctx, int iteration, int responseSize, String jndiName, int calls) {
         this.calls = calls;
         this.ctx = ctx;
+        this.responseSize = responseSize;
         this.jndiName = jndiName;
         this.iteration = iteration;
     }
@@ -314,7 +317,19 @@ class ThreadProcessor implements Callable<InvocationResult> {
             
             for (int i = 1; i <= calls; i++) {
                 long t1 = System.nanoTime();
-                ejb.businessMethod(threadId);
+                if(responseSize == 0) {
+                    ejb.businessMethod(threadId);
+                }
+                else {
+                    byte[] byteArray = ejb.sizedBusinessMethod(threadId, responseSize);
+                    if(logger.isTraceEnabled()) {
+                        logger.tracef("got byte array %s with length '%d'", byteArray.toString(), byteArray.length);
+                    }
+                    else if(logger.isDebugEnabled()) {
+                        logger.debugf("got a byte array of length '%d'", byteArray.length);
+                    }
+                }
+                
                 long singleDuration = (System.nanoTime() - t1);
                 logger.debugf("method call #%d duration %dns (%dms)", i, singleDuration, TimeUnit.MILLISECONDS.convert(singleDuration, TimeUnit.NANOSECONDS));
                 builder.withSingleCallDuration(i, singleDuration);
