@@ -51,7 +51,7 @@ public class SimpleStatefulSessionBean implements SessionBeanRemote, IsSerializa
 
     @Remove
     public void businessMethodDone() {
-        logger.infof("removing %s", this);
+        //logger.infof("removing %s", this);
     }
     
 
@@ -72,14 +72,13 @@ public class SimpleStatefulSessionBean implements SessionBeanRemote, IsSerializa
         
         for (int i = 0; i < MAX; i++) {
             int result = new Random().nextInt(100) * new Random().nextInt(100);
-            logger.debugf("Client Thread (%s) - Result: %d", calledFrom, result);
-            grow.add(new UnserializableData("Thread-" + Thread.currentThread().getId(), UUID.randomUUID().toString(), result));
+            grow.add(new UnserializableData("Thread-" + Thread.currentThread().getId(),  "sfdfs", result));
         }
         
-        int sum = grow.stream().mapToInt(myData -> myData.getResult()).sum();
+        //int sum = grow.stream().mapToInt(myData -> myData.getResult()).sum();
         
-        logger.infof("#%d MyData entries with a total result of %d, previous result was %d", grow.size(), sum, lastResult);
+        //logger.infof("#%d MyData entries with a total result of %d, previous result was %d", grow.size(), sum, lastResult);
         
-        lastResult = sum;
+        lastResult = 67;
     }
 }

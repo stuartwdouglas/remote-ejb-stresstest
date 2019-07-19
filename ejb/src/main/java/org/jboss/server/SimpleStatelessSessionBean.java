@@ -31,7 +31,7 @@ public class SimpleStatelessSessionBean implements SessionBeanRemote {
     private static final Logger logger = Logger.getLogger(SimpleStatelessSessionBean.class);
     
     public void businessMethod(String calledFrom) {
-        logger.infof("Client Thread (%s) - Result: %d", calledFrom, new Random().nextInt(100) * new Random().nextInt(100));
+        //logger.infof("Client Thread (%s) - Result: %d", calledFrom, new Random().nextInt(100) * new Random().nextInt(100));
     }
 
 

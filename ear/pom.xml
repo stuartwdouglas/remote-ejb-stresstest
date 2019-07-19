@@ -21,6 +21,12 @@
             <artifactId>remote-ejb-stresstest-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>remote-ejb-stresstest-war</artifactId>
+            <type>war</type>
+            <version>${project.version}</version>
+        </dependency>
         
         <dependency>
             <groupId>org.jboss</groupId>

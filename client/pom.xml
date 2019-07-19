@@ -43,6 +43,30 @@
             <artifactId>jboss-logging</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.remoting</groupId>
+            <artifactId>jboss-remoting</artifactId>
+            <version>5.0.13.Final-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.xnio</groupId>
+            <artifactId>xnio-nio</artifactId>
+            <version>3.7.2.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.xnio</groupId>
+            <artifactId>xnio-api</artifactId>
+            <version>3.7.2.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-ejb-client</artifactId>
+            <version>4.0.20.Final</version>
+        </dependency>
+
         <!-- spring dependency -->
         <dependency>
             <groupId>org.springframework</groupId>

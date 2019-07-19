@@ -36,7 +36,7 @@ public class MetricInterceptor implements Serializable {
             return context.proceed();
         } finally {
             long t1 = System.currentTimeMillis();
-            logger.infof("execution of %s took %dms", context.getTarget(), t1 - t0);
+            //logger.infof("execution of %s took %dms", context.getTarget(), t1 - t0);
         }
     }
 }

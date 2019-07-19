@@ -103,10 +103,12 @@
         <module>rest</module>
         <module>ear</module>
         <module>client</module>
+        <module>war</module>
     </modules>
 
     <build>
         <finalName>${project.artifactId}</finalName>
+
     </build>
 
 </project>
