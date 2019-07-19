@@ -307,6 +307,7 @@ class ThreadProcessor implements Callable<InvocationResult> {
 
         try {
             SessionBeanRemote ejb = (SessionBeanRemote) ctx.lookup(jndiName);
+            ejb = (SessionBeanRemote) ctx.lookup(jndiName);
 
             String threadId = String.valueOf(Thread.currentThread().getId());
             threadId = Thread.currentThread().getName();
