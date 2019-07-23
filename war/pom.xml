@@ -19,6 +19,13 @@
             <groupId>org.jboss</groupId>
             <artifactId>remote-ejb-stresstest-ejb</artifactId>
             <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <version>1.3</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.logging</groupId>

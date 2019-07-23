@@ -69,11 +69,11 @@ public class SimpleStatefulSessionBean implements SessionBeanRemote, IsSerializa
     }
     
     private void doBusiness(String calledFrom) {
-        
-        for (int i = 0; i < MAX; i++) {
-            int result = new Random().nextInt(100) * new Random().nextInt(100);
-            grow.add(new UnserializableData("Thread-" + Thread.currentThread().getId(),  "sfdfs", result));
-        }
+//
+//        for (int i = 0; i < MAX; i++) {
+//            int result = new Random().nextInt(100) * new Random().nextInt(100);
+//            grow.add(new UnserializableData("Thread-" + Thread.currentThread().getId(),  "sfdfs", result));
+//        }
         
         //int sum = grow.stream().mapToInt(myData -> myData.getResult()).sum();
         
